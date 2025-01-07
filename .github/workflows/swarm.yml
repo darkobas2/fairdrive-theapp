@@ -62,7 +62,8 @@ jobs:
         id: swarm-upload
         uses: ethersphere/swarm-actions/upload-dir@latest
         with:
-          bee-url: ${{ env.SWARM_URL }}
+          bee-url: ${{ secrets.SWARM_URL }}
+          postage-batch-id: ${{ secrets.BATCH_ID }}
           dir: ./out
           index-document: index.html
           deferred: false
@@ -73,7 +74,8 @@ jobs:
         env:
           SIGNER: SIGNER_${{ github.ref_name }}
         with:
-          bee-url: ${{ env.SWARM_URL }}
+          bee-url: ${{ secrets.SWARM_URL }}
+          postage-batch-id: ${{ secrets.BATCH_ID }}
           reference: ${{ steps.swarm-upload.outputs.reference }}
           topic: theapp
           signer: 60e5aaa3d78e8d03ffe13445fd5070690d51b98c87d7aba9280cda13218ec26b
